@@ -12,7 +12,7 @@ namespace Cozy.Data.Implementation.Mock
 
         private List<Home> Homes = new List<Home>()
         {
-            new Home { Id = 1, Address = "123 main street", City = "Austin"}
+            new Home { Id = 1, Address = "123 main street", City = "Austin", State = "TX", ImgURL = "https://cdnimages.familyhomeplans.com/plans/75977/75977-b600.jpg"}
         }
         ;
 

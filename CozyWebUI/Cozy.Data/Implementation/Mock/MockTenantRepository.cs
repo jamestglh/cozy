@@ -20,12 +20,12 @@ namespace Cozy.Data.Implementation.Mock
 
         public bool DeleteById(string tenantId)
         {
-            var tenantToDelete = GetByID(tenantId);
+            var tenantToDelete = GetById(tenantId);
             Tenants.Remove(tenantToDelete);
             return true;
         }
 
-        public Tenant GetByID(string tenantId)
+        public Tenant GetById(string tenantId)
         {
             return Tenants.Single(l => l.Id == tenantId);
         }

@@ -9,17 +9,10 @@ namespace Cozy.Service.Services
 
     public interface ILandlordService
     {
-        //Read
         Landlord GetById(string landlordId);
         ICollection<Landlord> GetLandlordByHomeId(int homeId);
-
-        //Create 
         Landlord Create(Landlord newLandlord);
-
-        //Update
         Landlord Update(Landlord updatedLandlord);
-
-        //Delete
         bool DeleteById(string landlordId);
     }
 

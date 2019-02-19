@@ -9,7 +9,12 @@ namespace Cozy.Data.Implementation.Mock
 {
     public class MockLeaseRepository : ILeaseRepository
     {
-        private List<Lease> Leases = new List<Lease>();
+        private List<Lease> Leases = new List<Lease>()
+        {
+            new Lease { Id = 1, HomeId = 1, StartDate = DateTime.Now.AddMonths(-5), EndDate = DateTime.Now.AddMonths(6), RentPrice = 800 },
+            new Lease { Id = 2, HomeId = 1, StartDate = DateTime.Now.AddMonths(-10), EndDate = DateTime.Now.AddMonths(-6), RentPrice = 700 },
+            new Lease { Id = 3, HomeId = 1, StartDate = DateTime.Now.AddMonths(-15), EndDate = DateTime.Now.AddMonths(-11), RentPrice = 600 }
+        };
 
         public Lease Create(Lease newLease)
         {
