@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cozy.Data.Context;
 using Cozy.Data.Implementation.EFCore;
 using Cozy.Data.Implementation.Mock;
 using Cozy.Data.Interfaces;
+using Cozy.Domain.Models;
 using Cozy.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,9 +22,17 @@ namespace CozyWebUI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            GetDependancyResolvedForMockRepositoryLayer(services);
-            //GetDependancyResolvedForEFCoreRepositoryLayer(services);
+            //GetDependancyResolvedForMockRepositoryLayer(services);
+            GetDependancyResolvedForEFCoreRepositoryLayer(services);
+
             GetDependancyResolvedForServiceLayer(services);
+
+            services.AddDbContext<CozyDbContext>();
+            services.AddDefaultIdentity<AppUser>()
+                .AddEntityFrameworkStores<CozyDbContext>();
+
+
+
             services.AddMvc();
         }
 
@@ -34,8 +44,10 @@ namespace CozyWebUI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
-            // so it knows where to find your stuff
+
+            
+            app.UseStaticFiles(); // so it knows where to find your stuff
+            app.UseAuthentication(); //makes use of identity
 
             app.UseMvcWithDefaultRoute();
             // controller/view/?id
@@ -54,6 +66,7 @@ namespace CozyWebUI
             services.AddScoped<IMaintenanceRepository, MockMaintenanceRepository>();
             services.AddScoped<IMaintenanceStatusRepository, MockMaintenanceStatusRepository>();
             services.AddScoped<IPaymentRepository, MockPaymentRepository>();
+            services.AddScoped<ITenantRepository, MockTenantRepository>();
 
         }
 
@@ -61,11 +74,12 @@ namespace CozyWebUI
         {
             //repository layer  injection
             services.AddScoped<IHomeRepository, EFCoreHomeRepository>();
-            services.AddScoped<ILandlordRepository, EFCoreLandlordRepository>();
+            //services.AddScoped<ILandlordRepository, EFCoreLandlordRepository>();
             services.AddScoped<ILeaseRepository, EFCoreLeaseRepository>();
             services.AddScoped<IMaintenanceRepository, EFCoreMaintenanceRepository>();
             services.AddScoped<IMaintenanceStatusRepository, EFCoreMaintenanceStatusRepository>();
             services.AddScoped<IPaymentRepository, EFCorePaymentRepository>();
+            //services.AddScoped<ITenantRepository, EFCoreTenantRepository>();
         }
 
         private void GetDependancyResolvedForServiceLayer(IServiceCollection services)

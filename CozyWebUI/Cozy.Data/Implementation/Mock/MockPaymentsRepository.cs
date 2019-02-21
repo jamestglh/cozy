@@ -30,10 +30,7 @@ namespace Cozy.Data.Implementation.Mock
             return Payments.Single(l => l.Id == paymentId);
         }
 
-        public ICollection<Payment> GetPaymentsByTenantId(string tenantId)
-        {
-            return Payments.FindAll(p => p.TenantId == tenantId);
-        }
+
 
         public ICollection<Payment> GetPaymentsByLeaseId(int leaseId)
         {

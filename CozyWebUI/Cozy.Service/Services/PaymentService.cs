@@ -10,7 +10,6 @@ namespace Cozy.Service.Services
     {
         //Read
         Payment GetById(int paymentId);
-        ICollection<Payment> GetPaymentsByTenantId(string tenantId);
         ICollection<Payment> GetPaymentsByLeaseId(int leaseId);
 
         //Create 
@@ -46,10 +45,6 @@ namespace Cozy.Service.Services
             return _paymentRepository.GetPaymentsByLeaseId(leaseId);
         }
 
-        public ICollection<Payment> GetPaymentsByTenantId(string tenantId)
-        {
-            return _paymentRepository.GetPaymentsByTenantId(tenantId);
-        }
 
         public Payment Update(Payment updatedPayment)
         {

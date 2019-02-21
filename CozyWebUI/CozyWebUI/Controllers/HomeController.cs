@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cozy.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CozyWebUI.Controllers
 {
+
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;

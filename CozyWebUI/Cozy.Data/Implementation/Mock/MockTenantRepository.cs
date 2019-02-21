@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Cozy.Data.Implementation.Mock
 {
-    class MockTenantRepository : ITenantRepository
+    public class MockTenantRepository : ITenantRepository
     {
         public List<Tenant> Tenants = new List<Tenant>();
         public Tenant Create(Tenant newTenant)
