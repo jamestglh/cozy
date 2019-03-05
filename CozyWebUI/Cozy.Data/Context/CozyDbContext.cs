@@ -1,4 +1,5 @@
 ﻿using Cozy.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -56,7 +57,10 @@ namespace Cozy.Data.Context
                 .HasForeignKey(m => m.TenantId)
                 .HasConstraintName("ForeignKey_Maintenance_AppUser");
 
-
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Landlord", NormalizedName = "LANDLORD"},
+                new IdentityRole { Name = "Tenant", NormalizedName = "TENANT" }
+                );
 
             modelBuilder.Entity<MaintenanceStatus>().HasData(
                 new MaintenanceStatus { Id = 1, Description = "New" },

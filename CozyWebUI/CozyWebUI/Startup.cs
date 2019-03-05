@@ -11,6 +11,7 @@ using Cozy.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,10 +29,15 @@ namespace CozyWebUI
             GetDependancyResolvedForServiceLayer(services);
 
             services.AddDbContext<CozyDbContext>();
-            services.AddDefaultIdentity<AppUser>()
+            services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<CozyDbContext>();
 
-
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/SignIn"; //override default for acct login (default is login not signin)
+                options.AccessDeniedPath = "/Account/Unauthorized";
+            });
+            
 
             services.AddMvc();
         }
