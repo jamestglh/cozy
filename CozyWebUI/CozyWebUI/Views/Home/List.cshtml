@@ -1,0 +1,44 @@
+﻿@model ICollection<Home>
+
+
+<h2>List</h2>
+
+<a class="btn btn-primary" asp-action="create" role="button">Add a Home</a>
+
+@if (Model.Count == 0)
+{
+    <div class=" alert alert-secondary">
+        You don't have any homes, holmes!
+    </div>
+
+    
+}
+else
+{
+    <table class="table table-dark">
+        <tr>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Image</th>
+        </tr>
+        @foreach (var h in Model)
+        {
+            <tr>
+                <td>@h.Address</td>
+                <td>@h.City</td>
+                <td>@h.State</td>
+                <td>
+                    <img src="@h.ImgURL" alt="Home Image" />
+                </td>
+            </tr>
+        }
+
+
+    </table>
+}
+
+
+
+
+

@@ -73,7 +73,14 @@ namespace CozyWebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn() => View();
+        public IActionResult SignIn()
+        {
+            if (User != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> SignIn(SignInViewModel vm)
